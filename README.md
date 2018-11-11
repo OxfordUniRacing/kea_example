@@ -39,5 +39,38 @@ arm-none-eabi-gdb -ex 'target extended-remote 127.0.0.1:2331'
 and in gdb
 
 ```
-(gdb) load tx.elf
+load tx.elf
 ```
+
+### Description
+
+
+Directory overview:
+
+```
+├── include : application header files
+│   └── can.h
+├── mscan : mscan library
+│   ├── cfg
+│   ├── inc
+│   └── src
+├── src : application source files
+│   ├── can.c
+│   ├── main.c
+│   └── MSCAN_Module.c
+└── system : system initialization and definitions
+    ├── include
+    └── src
+```
+
+The main action happens in `can.c` and `main.c`
+
+In `do_init` we initialize the can bus, configure tx and rx message buffers,
+and waits for the hardware to indicate everything is initalized.
+
+In `do_tx` we load data into the message buffer and puts it into the transmit
+queue. Note: `do_tx` return before the packet is actually transmited and acked
+so if the message hasn't been acked in time, e.g. no node on can bus to recieve,
+subsequent calls to do_tx will fail at load mb because it is still full.
+
+In `do_rx` loop to check if we have recieved any data into our message buffer.
