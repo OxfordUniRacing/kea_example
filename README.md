@@ -4,6 +4,12 @@
 
 Step 0: Get linux
 
+Step 0.5: Install compiler (arm-none-eabi-gcc)
+For ubuntu:
+```
+apt install arm-none-eabi-gcc
+```
+
 Step 1: Get the source code
 
 ```
