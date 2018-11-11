@@ -42,6 +42,8 @@ and in gdb
 load tx.elf
 ```
 
+Note: ask me if you want `.bin` files for programming, I can add support in makefile
+
 ### Description
 
 
@@ -74,3 +76,15 @@ so if the message hasn't been acked in time, e.g. no node on can bus to recieve,
 subsequent calls to do_tx will fail at load mb because it is still full.
 
 In `do_rx` loop to check if we have recieved any data into our message buffer.
+
+
+`MSCAN_Module.c` contains the interrupt handlers and contains an initialization
+routine to enable interrupts. It is copy pasted from example code with minimal
+modification, hence the uglyness.
+
+
+### Links
+
+[MSCAN driver for Kinetis EA devices](https://www.nxp.com/webapp/sps/download/license.jsp?colCode=MSCAN_KEA_DEVD&Parent_nodeId=1389306867337700597964&Parent_pageType=product)
+
+[OpenSDA JLink firmware](https://www.segger.com/products/debug-probes/j-link/models/other-j-links/opensda-sda-v2/)
